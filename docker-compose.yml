@@ -1,0 +1,47 @@
+services:
+  ros2:
+    build:
+      context: .
+      args:
+        USERNAME: ubuntu
+        USER_UID: ${UID:-1000}
+        USER_GID: ${GID:-1000}
+        GIT_NAME: ${GIT_NAME}
+        GIT_EMAIL: ${GIT_EMAIL}
+    container_name: ros2-workspace
+    network_mode: host
+    ipc: host
+    pid: host
+    stdin_open: true
+    tty: true
+    working_dir: /ros2_ws
+    user: ubuntu
+
+    environment:
+      - ROS_DOMAIN_ID=42
+      - ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
+      - DISPLAY=:0
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    volumes:
+      # Workspace with persistent build cache
+      - workspace:/ros2_ws
+      # Source code overlays on top
+      - ./src:/ros2_ws/src
+      # X11 for GUI applications
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    command: /bin/bash
+
+volumes:
+  workspace:
