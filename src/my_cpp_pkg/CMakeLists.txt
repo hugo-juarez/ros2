@@ -18,9 +18,13 @@ target_link_libraries(my_first_node PUBLIC rclcpp::rclcpp)
 add_executable(robot_news src/robot_news.cpp)
 target_link_libraries(robot_news PUBLIC rclcpp::rclcpp example_interfaces::example_interfaces)
 
+add_executable(smartphone src/smartphone.cpp)
+target_link_libraries(smartphone PUBLIC rclcpp::rclcpp example_interfaces::example_interfaces)
+
 install(TARGETS
   my_first_node
   robot_news
+  smartphone
   DESTINATION lib/${PROJECT_NAME}
 )
 
