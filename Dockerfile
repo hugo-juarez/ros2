@@ -31,6 +31,7 @@ RUN apt-get update \
         clang-tidy \
         ros-lyrical-turtlesim \
         ros-lyrical-rqt-common-plugins \
+        ros-lyrical-example-interfaces \
     && rm -rf /var/lib/apt/lists/*
 
 RUN echo "source /opt/ros/lyrical/setup.bash" >> /home/$USERNAME/.bashrc
