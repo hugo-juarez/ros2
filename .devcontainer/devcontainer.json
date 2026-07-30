@@ -1,0 +1,14 @@
+{
+    "name": "Dev Container for ROS2",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "ros2",
+    "workspaceFolder": "/ros2_ws",
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ranch-hand-robotics.rde-pack"
+            ]
+        }
+    }
+}
